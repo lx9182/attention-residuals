@@ -39,12 +39,21 @@ $$\mathbf{h}_l = \sum_{i=0}^{l-1} \alpha_{i \to l} \cdot \mathbf{v}_i$$
 Attention weights are computed as:
 
 $$
-\alpha_{i \to l} = \frac{\phi(\mathbf{q}_l,\, \mathbf{k}_i)}{\displaystyle\sum_{j=0}^{l-1} \phi(\mathbf{q}_l,\, \mathbf{k}_j)}, \qquad \phi(\mathbf{q}, \mathbf{k}) = \exp\!\bigl(\mathbf{q}^\top \mathrm{RMSNorm}(\mathbf{k})\bigr)
+\alpha_{i \to l} = \frac{\phi(\mathbf{q}_l,\, \mathbf{k}_i)}{\displaystyle\sum_{j=0}^{l-1} \phi(\mathbf{q}_l,\, \mathbf{k}_j)}, \qquad \phi(\mathbf{q}, \mathbf{k}) = \exp\bigl(\mathbf{q}^\top \mathrm{RMSNorm}(\mathbf{k})\bigr)
 $$
 
 Queries and keys are defined as:
 
-$$\mathbf{q}_l = \mathbf{w}_l \in \mathbb{R}^d \quad \text{(learnable per-layer vector)}, \qquad \mathbf{k}_i = \begin{cases} \mathbf{h}_1 & i = 0 \\ f_i(\mathbf{h}_i) & 1 \le i \le l{-}1 \end{cases}$$
+$$
+\mathbf{q}_l = \mathbf{w}_l \in \mathbb{R}^d \quad \text{(learnable per-layer vector)}, \qquad
+\mathbf{k}_i =
+\left\{
+\begin{aligned}
+\mathbf{h}_1 &\quad i = 0 \\
+f_i(\mathbf{h}_i) &\quad 1 \le i \le l-1
+\end{aligned}
+\right.
+$$
 
 The RMSNorm inside $\phi$ prevents layers with large-magnitude outputs from dominating. **Complexity:** $O(L^2 d)$ arithmetic, $O(Ld)$ memory.
 
