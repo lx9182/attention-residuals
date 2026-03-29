@@ -106,7 +106,11 @@ $\mathbf{b}_n^i$ denotes the partial sum over the first $i$ layers in block $n$.
 For the $i$-th layer in block $n$, the value set is:
 
 $$
-\mathbf{V} = \begin{cases} [\mathbf{b}_0,\, \mathbf{b}_1,\, \ldots,\, \mathbf{b}_{n-1}]^\top & i = 1 \;\text{(first layer of block)} \\ [\mathbf{b}_0,\, \mathbf{b}_1,\, \ldots,\, \mathbf{b}_{n-1},\, \mathbf{b}_n^{i-1}]^\top & i \ge 2 \;\text{(subsequent layers)} \end{cases}
+\mathbf{V} = 
+\begin{cases} 
+[\mathbf{b}_0, \mathbf{b}_1, \ldots, \mathbf{b}_{n-1}]^\top & i = 1 \text{ (first layer of block)} \\ 
+[\mathbf{b}_0, \mathbf{b}_1, \ldots, \mathbf{b}_{n-1}, \mathbf{b}_n^{i-1}]^\top & i \ge 2 \text{ (subsequent layers)} 
+\end{cases}
 $$
 
 **Efficiency:** $N = L$ recovers Full AttnRes; $N = 1$ reduces to standard residuals. Empirically $N \approx 8$ recovers most of the benefit.
