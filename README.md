@@ -47,12 +47,10 @@ Queries and keys are defined as:
 $$
 \mathbf{q}_l = \mathbf{w}_l \in \mathbb{R}^d \quad \text{(learnable per-layer vector)}, \qquad
 \mathbf{k}_i =
-\left\{
-\begin{aligned}
-\mathbf{h}_1 &\quad i = 0 \\
-f_i(\mathbf{h}_i) &\quad 1 \le i \le l-1
-\end{aligned}
-\right.
+\begin{cases} 
+\mathbf{h}_1 & i = 0 \\
+f_i(\mathbf{h}_i) & 1 \le i \le l-1 
+\end{cases}
 $$
 
 The RMSNorm inside $\phi$ prevents layers with large-magnitude outputs from dominating. **Complexity:** $O(L^2 d)$ arithmetic, $O(Ld)$ memory.
@@ -107,7 +105,9 @@ $\mathbf{b}_n^i$ denotes the partial sum over the first $i$ layers in block $n$.
 
 For the $i$-th layer in block $n$, the value set is:
 
-$$\mathbf{V} = \begin{cases} [\mathbf{b}_0,\, \mathbf{b}_1,\, \ldots,\, \mathbf{b}_{n-1}]^\top & i = 1 \;\text{(first layer of block)} \\ [\mathbf{b}_0,\, \mathbf{b}_1,\, \ldots,\, \mathbf{b}_{n-1},\, \mathbf{b}_n^{i-1}]^\top & i \ge 2 \;\text{(subsequent layers)} \end{cases}$$
+$$
+\mathbf{V} = \begin{cases} [\mathbf{b}_0,\, \mathbf{b}_1,\, \ldots,\, \mathbf{b}_{n-1}]^\top & i = 1 \;\text{(first layer of block)} \\ [\mathbf{b}_0,\, \mathbf{b}_1,\, \ldots,\, \mathbf{b}_{n-1},\, \mathbf{b}_n^{i-1}]^\top & i \ge 2 \;\text{(subsequent layers)} \end{cases}
+$$
 
 **Efficiency:** $N = L$ recovers Full AttnRes; $N = 1$ reduces to standard residuals. Empirically $N \approx 8$ recovers most of the benefit.
 
