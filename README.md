@@ -38,7 +38,9 @@ $$\mathbf{h}_l = \sum_{i=0}^{l-1} \alpha_{i \to l} \cdot \mathbf{v}_i$$
 
 Attention weights are computed as:
 
-$$\alpha_{i \to l} = \frac{\phi(\mathbf{q}_l,\, \mathbf{k}_i)}{\displaystyle\sum_{j=0}^{l-1} \phi(\mathbf{q}_l,\, \mathbf{k}_j)}, \qquad \phi(\mathbf{q}, \mathbf{k}) = \exp\!\bigl(\mathbf{q}^\top \operatorname{RMSNorm}(\mathbf{k})\bigr)$$
+$$
+\alpha_{i \to l} = \frac{\phi(\mathbf{q}_l,\, \mathbf{k}_i)}{\displaystyle\sum_{j=0}^{l-1} \phi(\mathbf{q}_l,\, \mathbf{k}_j)}, \qquad \phi(\mathbf{q}, \mathbf{k}) = \exp\!\bigl(\mathbf{q}^\top \mathrm{RMSNorm}(\mathbf{k})\bigr)
+$$
 
 Queries and keys are defined as:
 
